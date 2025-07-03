@@ -8,13 +8,15 @@ export default function Login({ onLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -39,7 +41,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-   <div className="auth-container">
+    <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -62,7 +64,11 @@ export default function Login({ onLogin }) {
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
-      {error && <p style={{ color: "red" }} aria-live="assertive">{error}</p>}
+      {error && (
+        <p style={{ color: "red" }} aria-live="assertive">
+          {error}
+        </p>
+      )}
       <p>
         Don't have an account? <Link to="/signup">Signup</Link>
       </p>

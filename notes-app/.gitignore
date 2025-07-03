@@ -2,6 +2,7 @@
 node_modules/
 notes-app/node_modules/
 notes-backend/node_modules/
+.env
 
 
 dist/
