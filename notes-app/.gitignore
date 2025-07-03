@@ -1,6 +1,7 @@
 
 node_modules/
-.env
+notes-app/node_modules/
+notes-backend/node_modules/
 
 
 dist/
