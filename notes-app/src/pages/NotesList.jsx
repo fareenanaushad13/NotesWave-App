@@ -7,6 +7,7 @@ export default function NotesList() {
   const [error, setError] = useState("");
   const [expandedNotes, setExpandedNotes] = useState([]);
   const token = localStorage.getItem("token");
+  const API_BASE = import.meta.env.VITE_API_BASE;
 
   useEffect(() => {
     if (!token) {
@@ -14,7 +15,7 @@ export default function NotesList() {
       return;
     }
 
-    fetch("http://localhost:5000/api/notes", {
+    fetch(`${API_BASE}/api/notes`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -43,11 +44,11 @@ export default function NotesList() {
         console.error("Error fetching notes:", err);
         setError("Failed to load notes. Please try again later.");
       });
-  }, [token, navigate]);
+  }, [token, navigate, API_BASE]);
 
   const deleteNote = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/notes/${id}`, {
+      const res = await fetch(`${API_BASE}/api/notes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
